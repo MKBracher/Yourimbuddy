@@ -6,10 +6,21 @@
 
 {% block content %}
     <form method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" required>
+        <label for="email">Email</label>
+        <input name="email" id="email" required>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
+        <label for="firstName">First Name</label>
+        <input type="firstName" name="firstName" id="firstName" required>
+        <label for="lastName">Last Name</label>
+        <input type="lastName" name="lastName" id="lastName" required>
+        <label for="degree">Degree</label>
+        <input type="degree" name="degree" id="degree" >
+        <label for="course">Course</label>
+        <input type="course" name="course" id="course" >
+        <label for="phNumber">Phone Number</label>
+        <input type="phNumber" name="phNumber" id="phNumber" d>
         <input type="submit" value="Register">
+        
     </form>
 {% endblock %}

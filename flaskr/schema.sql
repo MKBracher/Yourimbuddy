@@ -3,9 +3,15 @@ DROP TABLE IF EXISTS question;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
+    studentID CHAR(8) UNIQUE NOT NULL,
+    firstName TEXT  NOT NULL,
+    lastName TEXT  NOT NULL,
     password TEXT NOT NULL,
-    is_admin INT(1) DEFAULT 0
+    degree TEXT,
+    course TEXT,
+    phNumber INT,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    is_admin INT DEFAULT 0
 );
 
 CREATE TABLE question(

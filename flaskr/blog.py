@@ -13,7 +13,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     questions = db.execute(
-        'SELECT q.id, title, body, created, author_id, username'
+        'SELECT q.id, title, body, created, author_id, email'
         ' FROM question q JOIN user u ON q.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -46,7 +46,7 @@ def create():
 
 def get_question(id, check_author=True):
     question = get_db().execute(
-        'SELECT q.id, title, body, created, author_id, username'
+        'SELECT q.id, title, body, created, author_id, email'
         ' FROM question q JOIN user u ON q.author_id = u.id'
         ' WHERE q.id = ?',
         (id,)
