@@ -1,25 +1,50 @@
 <!doctype html>
 <title>{% block title %}{% endblock %}-Yourimbuddy </title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-<nav>
-    <h1>Yourimbuddy</h1>
-    <ul>
-        {% if g.user %}
-            <li><span>{{ g.user['email'] }}</span></li>
-            <li><a href="{{ url_for('auth.logout')}}"> Log out</a></li>
-        {% else %}
-        <li><a href="{{ url_for('auth.register')}}"> Register </a></li>
-        <li><a href="{{ url_for('auth.login')}}"> Login</a></li>
-        {% endif %}
-    </ul>
-</nav>
 
-<section class="content">
-    <header>
-        {% block header %} {% endblock %}
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+          <div class="container">
+            <img src="../static/images/DemoLogo2.png" alt="Yourimbuddy"
+            style = "width: 215px; height: 50px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{url_for('index')}}">Home</a>
+                <a class="nav-item nav-link" href="#">Campus Services</a>
+                <a class="nav-item nav-link" href="#">Study Essentials</a>
+                <a class="nav-item nav-link" href="#">FAQ</a>
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if g.user %}
+                  <a class="nav-item nav-link" href="#">Ask a Question</a>
+                  <a class="nav-item nav-link" href="#">Account</a>
+                  <a class="nav-item nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                {% else %}
+                  <a class="nav-item nav-link" href="{{url_for('auth.login')}}">Login</a>
+                  <a class="nav-item nav-link" href="{{url_for('auth.register')}}">Register</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </nav>
     </header>
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-</section>
+ 
+    <section class="content">
+        <header>
+            {% block header %} {% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>

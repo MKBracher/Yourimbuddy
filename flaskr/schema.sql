@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS question;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    studentID CHAR(8) UNIQUE NOT NULL,
+    stdID CHAR(8) UNIQUE NOT NULL,
     firstName TEXT  NOT NULL,
     lastName TEXT  NOT NULL,
     password TEXT NOT NULL,
