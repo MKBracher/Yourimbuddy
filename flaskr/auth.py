@@ -20,8 +20,8 @@ def register():
         stdID = request.form['stdID']
         firstName = request.form['firstName']
         lastName = request.form['lastName']
-        degree = request.form['degree']
-        course = request.form['course']
+        degree_id = request.form['degree_id']
+        course_id = request.form['course_id']
         phNumber = request.form['phNumber']
         is_admin = request.form.get('is_admin')
         db = get_db()
@@ -44,8 +44,8 @@ def register():
 
         if error is None:
             db.execute(
-                'INSERT INTO user (email, password, stdID, firstName, lastName, degree, course, phNumber, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (email, generate_password_hash(password), stdID, firstName, lastName, degree, course, phNumber, is_admin))
+                'INSERT INTO user (email, password, stdID, firstName, lastName, degree_id, course_id, phNumber, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (email, generate_password_hash(password), stdID, firstName, lastName, degree_id, course_id, phNumber, is_admin))
             db.commit()
             return redirect(url_for('auth.login'))
 
