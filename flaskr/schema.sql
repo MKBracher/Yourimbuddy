@@ -7,20 +7,20 @@ CREATE TABLE user (
     firstName   VARCHAR(50)     NOT NULL,
     lastName    VARCHAR(25)     NOT NULL,
     password    VARCHAR(20)     NOT NULL,
-    degree_id   INTEGER NULL    REFERENCES degree(id),
-    course_id   INTEGER NULL    REFERENCES course(id),
+    degree_id   INTEGER NULL    REFERENCES degree(degree_id),
+    course_id   INTEGER NULL    REFERENCES course(course_id),
     phNumber    VARCHAR(20),
     email       VARCHAR(200)    UNIQUE  NOT NULL,
     is_admin    INT             DEFAULT 0
 );
 
 CREATE TABLE degree (
-    id          INTEGER      PRIMARY KEY AUTOINCREMENT,
+    degree_id   INTEGER      PRIMARY KEY AUTOINCREMENT,
     degreeName  VARCHAR(100) UNIQUE
 );
 
 CREATE TABLE course (
-    id          INTEGER         PRIMARY KEY AUTOINCREMENT,
+    course_id   INTEGER         PRIMARY KEY AUTOINCREMENT,
     degree_id   INTEGER         NULL        REFERENCES degree(id),
     courseName  VARCHAR(100)    UNIQUE
 );
@@ -32,5 +32,5 @@ CREATE TABLE question(
     created     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     title       VARCHAR(25)     NOT NULL,
     body        VARCHAR(250)    NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user(id)
+    FOREIGN KEY (author_id)     REFERENCES user(id)
 );
