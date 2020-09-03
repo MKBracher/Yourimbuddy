@@ -17,13 +17,13 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        stdID = request.form['stdID']
+        studentID = request.form['studentID']
         firstName = request.form['firstName']
         lastName = request.form['lastName']
-        degree_id = request.form['degree_id']
-        course_id = request.form['course_id']
+        degreeID = request.form['degree']
+        courseID = request.form['course']
         phNumber = request.form['phNumber']
-        is_admin = request.form.get('is_admin')
+        isAdmin = request.form.get('isAdmin')
         db = get_db()
         error = None
 
@@ -31,21 +31,21 @@ def register():
             error = 'Email is required.'
         elif not password:
             error = 'Password is required.'
-        elif not stdID:
+        elif not studentID:
             error = 'Student ID is required'
         elif not firstName:
             error = 'First name is required'
         elif not lastName: 
             error = 'Last name is required'
         elif db.execute(
-            'SELECT id FROM user WHERE email = ?', (email,)
+            'SELECT memberID FROM member WHERE email = ?', (email,)
         ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(email)
+            error = 'Member {} is already registered.'.format(email)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (email, password, stdID, firstName, lastName, degree_id, course_id, phNumber, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (email, generate_password_hash(password), stdID, firstName, lastName, degree_id, course_id, phNumber, is_admin))
+                'INSERT INTO member (email, password, firstName, lastName, degreeID, phNumber) VALUES (?, ?, ?, ?, ?, ?)',
+                (email, generate_password_hash(password), firstName, lastName, degreeID, phNumber))
             db.commit()
             return redirect(url_for('auth.login'))
 
@@ -55,7 +55,7 @@ def register():
 
 
 class RegistrationForm(Form):
-    stdID = StringField('Student ID', [validators.DataRequired(), validators.length(min=8, max=8)])
+    studentID = StringField('Student ID', [validators.DataRequired(), validators.length(min=8, max=8)])
     firstName = StringField('First Name', [validators.DataRequired(), validators.length(min=2, max=50)])
     lastName = StringField('Last Name', [validators.DataRequired(), validators.length(min=2, max=50)])
     email = StringField('Email Address', [validators.DataRequired(), validators.length(min=6, max=35)])
@@ -65,14 +65,14 @@ class RegistrationForm(Form):
     degree = StringField('Degree', [validators.length(min=4, max=50)])
     course = StringField('Course Code', [validators.optional(), validators.length(min=4, max=30)])
     phNumber = IntegerField('Phone Number', [validators.optional()])
-    is_admin = BooleanField('Admin?', [validators.DataRequired()])
+    isAdmin = BooleanField('Admin?', [validators.DataRequired()])
 
 # @bp.route('/Register', methods=['GET', 'POST'])
 # def register():
 #     form = RegistrationForm(request.form)
 #     if request.method == 'POST' and form.validate():
-#         user = User(form.stdID.data, form.firstName.data,form.lastName.data, form.email.data, form.password.data, form.degree.data, form.course.data, form.phNumber.data, form.is_admin.data )
-#         db_session.add(user)
+#         member = Member(form.studentID.data, form.firstName.data,form.lastName.data, form.email.data, form.password.data, form.degree.data, form.course.data, form.phNumber.data, form.isAdmin.data )
+#         db_session.add(member)
 #         flash('Thanks for registering')
 #         return redirect(url_for('login'))
 #     return render_template('auth/register.html', form=form)
@@ -84,18 +84,18 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
-        user = db.execute(
-            'SELECT * FROM user WHERE email = ?', (email,)
+        member = db.execute(
+            'SELECT * FROM member WHERE email = ?', (email,)
         ).fetchone()
 
-        if user is None:
+        if member is None:
             error = 'Incorrect email.'
-        elif not check_password_hash(user['password'], password):
+        elif not check_password_hash(member['password'], password):
             error = 'Incorrect password.'
 
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            session['member_id'] = member['memberID']
             return redirect(url_for('index'))
 
         flash(error)
@@ -103,14 +103,14 @@ def login():
     return render_template('auth/login.html')
 
 @bp.before_app_request
-def load_logged_in_user():
-    user_id = session.get('user_id')
+def load_logged_in_member():
+    member_id = session.get('member_id')
 
-    if user_id is None:
-        g.user = None
+    if member_id is None:
+        g.member = None
     else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+        g.member = get_db().execute(
+            'SELECT * FROM member WHERE memberID = ?', (member_id,)
         ).fetchone()
 
 
@@ -122,7 +122,7 @@ def logout():
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        if g.member is None:
             return redirect(url_for('auth.login'))
 
         return view(**kwargs)

@@ -14,14 +14,14 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     questions = db.execute(
-        'SELECT q.id, title, body, created, author_id, firstName, is_admin'
-        ' FROM question q JOIN user u ON q.author_id = u.id'
+        'SELECT q.questionID, title, body, created, authorID, firstName'
+        ' FROM question q JOIN member m ON q.authorID = m.memberID'
         ' ORDER BY created DESC'
     ).fetchall()
-    user = db.execute(
-        'SELECT * FROM user'
+    member = db.execute(
+        'SELECT * FROM member'
         ).fetchall()
-    return render_template('blog/index.html', questions=questions, user=user)
+    return render_template('blog/index.html', questions=questions, member=member)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -40,26 +40,26 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO question (title, body, author_id)'
+                'INSERT INTO question (title, body, authorID)'
                 'VALUES (?, ?, ?)',
-                (title, body, g.user['id'])
+                (title, body, g.member['memberID'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
     return render_template('blog/create.html')
 
-def get_question(id, check_author=True):
+def get_question(questionID, check_author=True):
     question = get_db().execute(
-        'SELECT q.id, title, body, created, author_id, email'
-        ' FROM question q JOIN user u ON q.author_id = u.id'
-        ' WHERE q.id = ?',
-        (id,)
+        'SELECT q.questionID, title, body, created, authorID, email'
+        ' FROM question q JOIN member m ON q.authorID = m.memberID'
+        ' WHERE q.questionID = ?',
+        (questionID,)
     ).fetchone()
 
     if question is None:
-        abort(404, "Question id {0} doesn't exist.".format(id))
+        abort(404, "Question id {0} doesn't exist.".format(questionID))
 
-    if check_author and question['author_id'] != g.user['id']:
+    if check_author and question['authorID'] != g.member['memberID']:
         abort(403)
 
     return question
