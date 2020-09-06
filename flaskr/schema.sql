@@ -13,7 +13,7 @@ CREATE TABLE member (
     memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
     firstName   VARCHAR(50)     NOT NULL,
     lastName    VARCHAR(25)     NOT NULL,
-    password    VARCHAR(20)     NOT NULL,
+    pword    VARCHAR(20)     NOT NULL,
     degreeID    INTEGER NULL    REFERENCES degree(degreeID),
     phNumber    VARCHAR(20),
     email       VARCHAR(200)    UNIQUE  NOT NULL    

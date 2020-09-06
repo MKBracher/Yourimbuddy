@@ -16,7 +16,7 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 def register():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        pword = request.form['pword']
         studentID = request.form['studentID']
         firstName = request.form['firstName']
         lastName = request.form['lastName']
@@ -29,7 +29,7 @@ def register():
 
         if not email:
             error = 'Email is required.'
-        elif not password:
+        elif not pword:
             error = 'Password is required.'
         elif not studentID:
             error = 'Student ID is required'
@@ -44,8 +44,8 @@ def register():
 
         if error is None:
             db.execute(
-                'INSERT INTO member (email, password, firstName, lastName, degreeID, phNumber) VALUES (?, ?, ?, ?, ?, ?)',
-                (email, generate_password_hash(password), firstName, lastName, degreeID, phNumber))
+                'INSERT INTO member (email, pword, firstName, lastName, degreeID, phNumber) VALUES (?, ?, ?, ?, ?, ?)',
+                (email, generate_password_hash(pword), firstName, lastName, degreeID, phNumber))
             db.commit()
             return redirect(url_for('auth.login'))
 
@@ -59,7 +59,7 @@ class RegistrationForm(Form):
     firstName = StringField('First Name', [validators.DataRequired(), validators.length(min=2, max=50)])
     lastName = StringField('Last Name', [validators.DataRequired(), validators.length(min=2, max=50)])
     email = StringField('Email Address', [validators.DataRequired(), validators.length(min=6, max=35)])
-    password = PasswordField('New Password', [validators.DataRequired(), validators.EqualTo('confirm', message = 'Passwords must match')
+    pword = PasswordField('New Password', [validators.DataRequired(), validators.EqualTo('confirm', message = 'Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
     degree = StringField('Degree', [validators.length(min=4, max=50)])
@@ -81,7 +81,7 @@ class RegistrationForm(Form):
 def login():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        pword = request.form['pword']
         db = get_db()
         error = None
         member = db.execute(
@@ -90,7 +90,7 @@ def login():
 
         if member is None:
             error = 'Incorrect email.'
-        elif not check_password_hash(member['password'], password):
+        elif not check_password_hash(member['pword'], pword):
             error = 'Incorrect password.'
 
         if error is None:
