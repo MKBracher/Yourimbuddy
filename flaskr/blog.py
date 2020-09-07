@@ -2,7 +2,6 @@ from flask import(
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 
-
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
@@ -10,8 +9,8 @@ from flaskr.db import get_db
 
 bp = Blueprint('blog', __name__)
 
-@bp.route('/')
-def index():
+@bp.route('/questions')
+def questions():
     db = get_db()
     questions = db.execute(
         'SELECT q.questionID, title, body, created, authorID, firstName'
@@ -21,7 +20,7 @@ def index():
     member = db.execute(
         'SELECT * FROM member'
         ).fetchall()
-    return render_template('blog/index.html', questions=questions, member=member)
+    return render_template('blog/questions.html', questions=questions, member=member)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
