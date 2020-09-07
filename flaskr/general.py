@@ -27,7 +27,7 @@ def studyEssentials():
 def FAQ():
     return render_template('general/FAQ.html')
 
-@bp.route('/FAQ', methods=('GET', 'POST'))
+@bp.route('/account', methods=('GET', 'POST'))
 @login_required
 def account():
     return render_template('general/account.html')

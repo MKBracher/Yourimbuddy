@@ -23,7 +23,7 @@
               <div class="navbar-nav">
                 {% if g.member %}
                   <a class="nav-item nav-link" href="{{url_for('blog.questions')}}">Ask a Question</a>
-                  <a class="nav-item nav-link" href="#">Account</a>
+                  <a class="nav-item nav-link" href="{{url_for('general.account')}}">Account</a>
                   <a class="nav-item nav-link" href="{{url_for('auth.logout')}}">Logout</a>
                 {% else %}
                   <a class="nav-item nav-link" href="{{url_for('auth.login')}}">Login</a>
