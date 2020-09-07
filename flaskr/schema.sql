@@ -13,14 +13,15 @@ CREATE TABLE member (
     memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
     firstName   VARCHAR(50)     NOT NULL,
     lastName    VARCHAR(25)     NOT NULL,
-    pword    VARCHAR(20)     NOT NULL,
+    pword       VARCHAR(20)     NOT NULL,
     degreeID    INTEGER NULL    REFERENCES degree(degreeID),
     phNumber    VARCHAR(20),
     email       VARCHAR(200)    UNIQUE  NOT NULL    
 );
 
 CREATE TABLE student(
-    studentID   CHAR(8) UNIQUE  NOT NULL
+    studentID   CHAR(8) UNIQUE  NOT NULL,
+    completedCourses    VARCHAR(2000)
 );
 
 CREATE TABLE staff (
@@ -38,10 +39,12 @@ CREATE TABLE course (
     degreeID   INTEGER         NULL        REFERENCES degree(degreeID),
     courseName  VARCHAR(100)   UNIQUE
 );
--- add completed/enrolled 
+
 CREATE TABLE memberCourse (
     memberID      INTEGER       NOT NULL,
-    courseID    INTEGER         NOT NULL,
+    courseID      INTEGER       NOT NULL,
+    enrolled      BOOLEAN,
+    completed     BOOLEAN,
     PRIMARY KEY (memberID, courseID),
     FOREIGN KEY (memberID)      REFERENCES member(memberID),
     FOREIGN KEY (courseID)      REFERENCES course(courseID)
@@ -55,3 +58,16 @@ CREATE TABLE question(
     body        VARCHAR(250)    NOT NULL,
     FOREIGN KEY (authorID)     REFERENCES member(memberID)
 );
+
+
+-- selects all membercourses where course completed
+-- SELECT completed FROM memberCourse WHERE completed = 1
+
+-- selects all membercourses where enrolled
+-- SELECT enrolled FROM memberCourse WHERE completed = 1 
+
+-- inserts a completed course into students completed course list commented out for now 
+-- INSERT INTO student(completedCourses)
+-- SELECT memberCourse(courseID)
+-- WHERE completed = 1
+-- VALUES (concat(completedCourses, courseID))
