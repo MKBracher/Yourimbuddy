@@ -31,12 +31,15 @@ body {padding-top: 65px;} */
 /* body { max-width: 960px; margin: 0 auto; background: white; padding-top: 65px; } */
 
 body {
-    background-image: url("../static/images/demo-background.png");
-    background: url("../static/images/demo-background.png");
+    background-image: url("../static/images/default-bg-flat.png");
+    background: url("../static/images/default-bg-flat.png");
     background-repeat: repeat;
     background-color: #CACACA; 
     color: #333333;
     margin-top: 5rem;
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 85px;
   }
   
   h1, h2, h3, h4, h5, h6 {

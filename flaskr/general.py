@@ -10,6 +10,8 @@ from flaskr.db import get_db
 bp = Blueprint('general', __name__, template_folder='templates')
 
 
+
+
 @bp.route('/')
 def index():
     return render_template('general/index.html')
@@ -30,4 +32,8 @@ def FAQ():
 @bp.route('/account', methods=('GET', 'POST'))
 @login_required
 def account():
-    return render_template('general/account.html')
+    db = get_db()
+    member = db.execute(
+        'SELECT * FROM member'
+        ).fetchall()
+    return render_template('general/account.html', current_user = member)
