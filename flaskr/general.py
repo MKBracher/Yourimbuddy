@@ -11,7 +11,6 @@ bp = Blueprint('general', __name__, template_folder='templates')
 
 
 @bp.route('/')
-@login_required
 def index():
     return render_template('general/index.html')
 
@@ -29,5 +28,6 @@ def FAQ():
     return render_template('general/FAQ.html')
 
 @bp.route('/FAQ', methods=('GET', 'POST'))
+@login_required
 def account():
     return render_template('general/account.html')
