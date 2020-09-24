@@ -37,7 +37,9 @@ body {
     background-color: #CACACA; 
     color: #333333;
     margin-top: 5rem;
-    max-width: 960px;
+    padding-left: 1%;
+    padding-right: 1%;
+    /* max-width: 960px; */
     margin: 0 auto;
     padding-top: 85px;
   }
