@@ -20,27 +20,9 @@
                 <a class="nav-item nav-link" href="{{url_for('general.FAQ')}}">FAQ</a>
               </div>
               <!-- Navbar Right Side -->
-
-              <!-- Searchbar -->
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <input type="text" id = "livebox">
-              <p id = "datalist"></p>
-              <script>
-                $(document).ready(function(){
-                    $("#livebox").on("input",function(e){
-                        textlive = $("#livebox").val();
-                        // Get ajax function error here, might need to try different searchbar
-                        $.ajax({
-                            method:"post",
-                            url:"/livesearch",
-                            data:{textpyth:textlive},
-                            success:function(res){
-                    
-                            }
-                        });
-                    });
-                });
-              </script>
+              
+               
+            
               <div class="navbar-nav">
                 {% if g.member %}
                   <a class="nav-item nav-link" href="{{url_for('blog.questions')}}">Ask a Question</a>
@@ -51,6 +33,13 @@
                   <a class="nav-item nav-link" href="{{url_for('auth.register')}}">Register</a>
                 {% endif %}
               </div>
+              <form class="form-inline" method="GET" action="SEARCH">
+                <div class="form-group">
+                  <label for="query"></label>
+                  <input type="text" class="form-control" name="query" id="query">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </form>
             </div>
           </div>
         </nav>

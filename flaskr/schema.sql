@@ -59,6 +59,20 @@ CREATE TABLE question(
     FOREIGN KEY (authorID)     REFERENCES member(memberID)
 );
 
+-- CREATE TABLE Content(
+--     pageID              INTEGER        NOT NULL  PRIMARY KEY,
+--     pageName            VARCHAR(50)    NOT NULL,
+--     sectionName         VARCHAR(50)    NOT NULL,
+--     sectionSubTitle     VARCHAR(50)    NOT NULL,
+--     sectionDescription  VARCHAR(4000)  NOT NULL,
+-- );
+
+-- INSERT INTO Content (pageID, pageName, sectionName, sectionSubTitle, sectionDescription),
+-- VALUES ('1', 'Study Essentials', 'Your First Day', 'O-Week', 'O Week is a great way to get involved in activities with your soon-to-be fellow cohort. It is generally held the week before the Uni Semester starts or Week 1, hence the name "O week". You can check out all the student clubs so that you can meet people with similar interests.');
+
+
+
+
 
 -- selects all membercourses where course completed
 -- SELECT completed FROM memberCourse WHERE completed = 1
@@ -67,7 +81,7 @@ CREATE TABLE question(
 -- SELECT enrolled FROM memberCourse WHERE completed = 1 
 
 -- inserts a completed course into students completed course list commented out for now 
--- INSERT INTO student(completedCourses)
+-- INSERT INTO student(completedCourses)*
 -- SELECT memberCourse(courseID)
 -- WHERE completed = 1
 -- VALUES (concat(completedCourses, courseID))

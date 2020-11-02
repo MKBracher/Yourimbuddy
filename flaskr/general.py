@@ -6,6 +6,9 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
+from django import forms
+
+
 
 bp = Blueprint('general', __name__, template_folder='templates')
 
@@ -37,3 +40,16 @@ def account():
         'SELECT * FROM member'
         ).fetchall()
     return render_template('general/account.html', current_user = member)
+
+
+
+# searchbar stuff
+@bp.route('/searchindex')
+def searchindex():
+    posts = Post.query.all()
+    return render_template('searchindex.html', posts=posts)
+
+@bp.route('/search_results/<query>')
+def search_results(query):
+  results = User.query.whoosh_search(query).all()
+  return render_template('search_results.html', query=query, results=results)

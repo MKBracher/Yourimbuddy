@@ -129,4 +129,3 @@ def login_required(view):
 
     return wrapped_view
 
-

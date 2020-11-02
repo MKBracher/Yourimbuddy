@@ -7,9 +7,9 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 # Don't know if this is needed
-import sqlite3
+# import sqlite3
 # Think need to replace schema with actual db file
-conn = sqlite3.connect('schema.sql')
+# conn = sqlite3.connect('schema.sql')
 
 bp = Blueprint('blog', __name__)
 
@@ -104,11 +104,11 @@ def delete(id):
 
 
 # searchbar route, doesn't work due to error in javascript+
-@bp.route("/livesearch",methods=["POST","GET"])
-def livesearch():
-    searchbox = request.form.get("textpyth")
-    cursor = conn.cursor()
-    query = "select * from member where firstName LIKE '{}%' order by firstName".format(searchbox)
-    cursor.execute(query)
-    result = cursor.fetchall()
-    return jsonify(result)
+# @bp.route("/livesearch",methods=["POST","GET"])
+# def livesearch():
+#     searchbox = request.form.get("textpyth")
+#     cursor = conn.cursor()
+#     query = "select * from member where firstName LIKE '{}%' order by firstName".format(searchbox)
+#     cursor.execute(query)
+#     result = cursor.fetchall()
+#     return jsonify(result)
