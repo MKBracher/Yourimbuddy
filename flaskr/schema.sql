@@ -9,56 +9,56 @@ DROP TABLE IF EXISTS uniPage;
 DROP TABLE IF EXISTS content;
 DROP TABLE IF EXISTS section;
 
--- change user to member or something, same with password and admin
--- CREATE TABLE member (
---     memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
---     firstName   VARCHAR(50)     NOT NULL,
---     lastName    VARCHAR(25)     NOT NULL,
---     pword       VARCHAR(20)     NOT NULL,
---     degreeID    INTEGER NULL    REFERENCES degree(degreeID),
---     phNumber    VARCHAR(20),
---     email       VARCHAR(200)    UNIQUE  NOT NULL    
--- );
 
--- CREATE TABLE student(
---     studentID   CHAR(8) UNIQUE  NOT NULL,
---     completedCourses    VARCHAR(2000)
--- );
+CREATE TABLE member (
+    memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
+    firstName   VARCHAR(50)     NOT NULL,
+    lastName    VARCHAR(25)     NOT NULL,
+    pword       VARCHAR(20)     NOT NULL,
+    degreeID    INTEGER NULL    REFERENCES degree(degreeID),
+    phNumber    VARCHAR(20),
+    email       VARCHAR(200)    UNIQUE  NOT NULL    
+);
 
--- CREATE TABLE staff (
---     staffID     CHAR(6) UNIQUE  NOT NULL,
---     isAdmin    INTEGER         DEFAULT 0
--- );
+CREATE TABLE student(
+    studentID   CHAR(8) UNIQUE  NOT NULL,
+    completedCourses    VARCHAR(2000)
+);
 
--- CREATE TABLE degree (
---     degreeID   INTEGER         PRIMARY KEY AUTOINCREMENT,
---     degreeName  VARCHAR(100)   UNIQUE
--- );
+CREATE TABLE staff (
+    staffID     CHAR(6) UNIQUE  NOT NULL,
+    isAdmin    INTEGER         DEFAULT 0
+);
 
--- CREATE TABLE course (
---     courseID   INTEGER         PRIMARY KEY AUTOINCREMENT,
---     degreeID   INTEGER         NULL        REFERENCES degree(degreeID),
---     courseName  VARCHAR(100)   UNIQUE
--- );
+CREATE TABLE degree (
+    degreeID   INTEGER         PRIMARY KEY AUTOINCREMENT,
+    degreeName  VARCHAR(100)   UNIQUE
+);
 
--- CREATE TABLE memberCourse (
---     memberID      INTEGER       NOT NULL,
---     courseID      INTEGER       NOT NULL,
---     enrolled      BOOLEAN,
---     completed     BOOLEAN,
---     PRIMARY KEY (memberID, courseID),
---     FOREIGN KEY (memberID)      REFERENCES member(memberID),
---     FOREIGN KEY (courseID)      REFERENCES course(courseID)
--- );
+CREATE TABLE course (
+    courseID   INTEGER         PRIMARY KEY AUTOINCREMENT,
+    degreeID   INTEGER         NULL        REFERENCES degree(degreeID),
+    courseName  VARCHAR(100)   UNIQUE
+);
 
--- CREATE TABLE question(
---     questionID  INTEGER         PRIMARY KEY AUTOINCREMENT,
---     authorID    INTEGER         NOT NULL,
---     created     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
---     title       VARCHAR(25)     NOT NULL,
---     body        VARCHAR(250)    NOT NULL,
---     FOREIGN KEY (authorID)     REFERENCES member(memberID)
--- );
+CREATE TABLE memberCourse (
+    memberID      INTEGER       NOT NULL,
+    courseID      INTEGER       NOT NULL,
+    enrolled      BOOLEAN,
+    completed     BOOLEAN,
+    PRIMARY KEY (memberID, courseID),
+    FOREIGN KEY (memberID)      REFERENCES member(memberID),
+    FOREIGN KEY (courseID)      REFERENCES course(courseID)
+);
+
+CREATE TABLE question(
+    questionID  INTEGER         PRIMARY KEY AUTOINCREMENT,
+    authorID    INTEGER         NOT NULL,
+    created     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    title       VARCHAR(25)     NOT NULL,
+    body        VARCHAR(250)    NOT NULL,
+    FOREIGN KEY (authorID)     REFERENCES member(memberID)
+);
 
 
 CREATE TABLE uniPage(
@@ -108,18 +108,3 @@ INSERT INTO section VALUES ('1', '1', 'Night Security Shuttle Information', 'Thi
 ('11', '6', '', '- Your Course Coordinators and Lecturers will supply you with a list of the textbooks, readings and other resources that are prescribed for your courses at your first lecture/class. - We strongly encourage students to wait for their first class for their lecturers to inform them of the appropriate textbooks as they may have change or may require different ones.  - From here you can choose to purchase the text online, from a book store, or from online second hand textbook sites.'),
 ('12', '7', 'Where to get program advice', 'Preparation is the key to a successful exam period, so make sure you’ve got your dates and times locked in, then plan your study based on that information. As for the best ways to study for exams, UON’s Centre for Teaching and Learning has some handy pointers: Tips for studying for exams (LINK THIS) Exam Strategies (LINK THIS) How to build a memory aid (LINK THIS)'),
 ('13', '7', 'Memory Aids', 'The University of Newcastle has an open book policy for exams. Except for some exemptions, the memory aid is the minimum allowed for exams, but some courses will allow for more than the memory aid. Always check your course outlines so that you know exactly what you can bring into each exam.  Unless stated otherwise, a memory aid is 1 x A4 double-sided sheet of any type of notes, handwritten or otherwise. It can be on coloured paper and can contain diagrams.  What to bring: Most importantly, your Student ID, Driver''s License or passport to all exams, Pens or pencils, Erasers, A clear water bottle, Tissues');
-
-
-
-
--- selects all membercourses where course completed
--- SELECT completed FROM memberCourse WHERE completed = 1
-
--- selects all membercourses where enrolled
--- SELECT enrolled FROM memberCourse WHERE completed = 1 
-
--- inserts a completed course into students completed course list commented out for now 
--- INSERT INTO student(completedCourses)*
--- SELECT memberCourse(courseID)
--- WHERE completed = 1
--- VALUES (concat(completedCourses, courseID))
