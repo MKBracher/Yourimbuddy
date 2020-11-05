@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS memberCourse;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS staff;
-
+DROP TABLE IF EXISTS content;
 
 
 -- change user to member or something, same with password and admin
@@ -59,17 +59,13 @@ CREATE TABLE question(
     FOREIGN KEY (authorID)     REFERENCES member(memberID)
 );
 
--- CREATE TABLE Content(
---     pageID              INTEGER        NOT NULL  PRIMARY KEY,
---     pageName            VARCHAR(50)    NOT NULL,
---     sectionName         VARCHAR(50)    NOT NULL,
---     sectionSubTitle     VARCHAR(50)    NOT NULL,
---     sectionDescription  VARCHAR(4000)  NOT NULL,
--- );
-
--- INSERT INTO Content (pageID, pageName, sectionName, sectionSubTitle, sectionDescription),
--- VALUES ('1', 'Study Essentials', 'Your First Day', 'O-Week', 'O Week is a great way to get involved in activities with your soon-to-be fellow cohort. It is generally held the week before the Uni Semester starts or Week 1, hence the name "O week". You can check out all the student clubs so that you can meet people with similar interests.');
-
+CREATE TABLE content(
+    pageID              INTEGER        NOT NULL  PRIMARY KEY,
+    pageName            VARCHAR(50)    NOT NULL,
+    sectionName         VARCHAR(50)    NOT NULL,
+    sectionSubTitle     VARCHAR(50)    NOT NULL,
+    sectionDescription  VARCHAR(4000)  NOT NULL
+);
 
 
 

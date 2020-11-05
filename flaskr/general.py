@@ -49,7 +49,13 @@ def searchindex():
     posts = Post.query.all()
     return render_template('searchindex.html', posts=posts)
 
-@bp.route('/search_results/<query>')
+
+@bp.route('/search_results/<query>', methods=['GET', 'POST'])
 def search_results(query):
-  results = User.query.whoosh_search(query).all()
-  return render_template('search_results.html', query=query, results=results)
+    qvar = request.form['query']
+    db = get_db()
+    error = None
+    results = db.execute(
+        'SELECT * FROM content WHERE sectionName LIKE "%{}%" or "sectionTitle LIKE "%{}%" or "sectionDescription LIKE "%{}%"'.format(qvar, qvar, qvar)
+    ).fetchall()
+    return render_template('search_results.html', query=query, results=results)

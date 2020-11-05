@@ -31,7 +31,7 @@ def select_all_content(conn):
 def select_content_by_priority(conn, priority):
     
     cur = conn.cursor()
-    cur.execute("SELECT * FROM content WHERE priority=?", (priority,))
+    cur.execute("SELECT * FROM content WHERE ", (priority,))
 
     rows = cur.fetchall()
 
