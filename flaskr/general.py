@@ -44,10 +44,10 @@ def account():
 
 
 # searchbar stuff
-@bp.route('/searchindex')
-def searchindex():
-    posts = Post.query.all()
-    return render_template('searchindex.html', posts=posts)
+# @bp.route('/searchindex')
+# def searchindex():
+#     posts = Post.query.all()
+#     return render_template('searchindex.html', posts=posts)
 
 
 @bp.route('/search_results/<query>', methods=['GET', 'POST'])
@@ -58,4 +58,4 @@ def search_results(query):
     results = db.execute(
         'SELECT * FROM content WHERE sectionName LIKE "%{}%" or "sectionTitle LIKE "%{}%" or "sectionDescription LIKE "%{}%"'.format(qvar, qvar, qvar)
     ).fetchall()
-    return render_template('search_results.html', query=query, results=results)
+    return render_template('general/search_results.html', query=query, results=results)

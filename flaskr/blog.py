@@ -102,13 +102,3 @@ def delete(id):
     db.commit()
     return redirect(url_for('blog.index'))
 
-
-# searchbar route, doesn't work due to error in javascript+
-# @bp.route("/livesearch",methods=["POST","GET"])
-# def livesearch():
-#     searchbox = request.form.get("textpyth")
-#     cursor = conn.cursor()
-#     query = "select * from member where firstName LIKE '{}%' order by firstName".format(searchbox)
-#     cursor.execute(query)
-#     result = cursor.fetchall()
-#     return jsonify(result)
