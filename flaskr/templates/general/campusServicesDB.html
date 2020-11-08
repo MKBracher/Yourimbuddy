@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
  
 {% block header %}
-    <h1>
-    {% block title %}
-    {{page['pageName']}}    
-    {% endblock %}
-    </h1>
+    {% for page in pages %}
+        <header><h1>{{page['pageName']}}</h1></header>
+    {% endfor %}
 {% endblock %}
  
 {% block content %}
@@ -17,46 +15,31 @@
        <h5> Campus Map</h5>
     <img class = "card-img-top" src="../static/images/OurimbahMap.jpg" alt="Map Of Ourimbah Campus"></div></div>
   
-   <div class="card">
-       <div class="card-body">
-    {% for content in contents %}
-   <h5>{{content['sectionName']}}</h5>
-    {% endfor %}
-   <ul>
-       <li><i>Night Security Shuttle Information</i></li>
-       This service is available on all campuses and can be arranged for pickup
-       by calling 4921 5888. It can be used to get between buildings and vehicles
-       or to the Railway Station on request.
- 
-       <li><i>Safe Walk Service</i></li>
-       Call 4921 5888 or email security-services@newcastle.edu.au
-       The service provided will escort you from building to building
-       or building to vehicle and vice versa, within the boudnaries of the campus.
-      
-       <li><i>Smart Paths</i></li>
-       For when travelling campus alone, there are certain paths that are very well lit with
-       enhanced lighting, CCTV surveillance, extra wide paths and reduced surrounding vegetation.
- 
-       <li><i>Emergency Contact Information</i></li>
-       It is important to call '000' in the event of an emergency.
-   </ul>
-   </div>
-</div>
-       <div class="card">
-           <div class="card-body">
-                   <h5>Get in contact with us!</h5>
-                   <ul><u>General and Student Enquiries</u><br>
-                       Phone: 1300 ASK UON or +61 2 4921 5000 (int'l)<br>
-                       Enquire online: <a href="https://askuon-future.newcastle.edu.au/app/ask">AskUON</a> <br></ul>
-                   <ul><u>Central Coast</u><br>
-                       Phone: +61 2 4348 4000<br>
-                       Fax: +61 2 4348 4035<br>
-                       Enquire online: <a href="https://askuon-future.newcastle.edu.au/app/ask">AskUON</a> <br></ul>
-                       
-       </div></div>
-       <div class="card">
-           <img src="../static/images/OvalShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
-         </div>
-</div>
-{% endblock content %}
+        {% for content in contents %}
+        
+                <header>
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <article class="post">
+                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                                    <!-- if section['sectionID'] == content['contentID']% -->
+                                        {% for section in sections %}
+                                            
+                                                <br>
+                                                
+                                                    <b>{{section['sectionSubTitle']}}</b>
+                                                        <br>
+                                                        {{section['sectionDescription']}}
+                                                        <br>
+                                                
+                                            
+                                        {% endfor %}
+                    </div>
+            
+                </header>
+          
+                
+        {% endfor %}
+{% endblock %}
 

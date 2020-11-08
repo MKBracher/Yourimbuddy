@@ -60,8 +60,11 @@ CREATE TABLE question(
     created     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     title       VARCHAR(25)     NOT NULL,
     body        VARCHAR(250)    NOT NULL,
-    FOREIGN KEY (authorID)     REFERENCES member(memberID)
+    FOREIGN KEY (authorID)     REFERENCES member(memberID) ON UPDATE CASCADE ON DELETE NO ACTION
 );
+INSERT INTO member VALUES('1', 'test', 'testington', 'test', '', 'test', 'test@test.com');
+INSERT INTO question VALUES('2', '1', '', 'Bachelor of IT', 'Test body part here hello test.'),
+('3', '1', '', 'Hello', 'hello world this major project is working now.');
 
 CREATE TABLE uniPage(
     pageID  INTEGER NOT NULL,

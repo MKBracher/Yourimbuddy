@@ -6,7 +6,6 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
-from django import forms
 
 
 
@@ -21,7 +20,22 @@ def index():
 
 @bp.route('/services', methods=('GET', 'POST'))
 def campusServices():
-    return render_template('general/campusServices.html')
+    db = get_db()
+    contents = db.execute(
+        'SELECT * \
+        FROM content\
+        WHERE pageID = "1"'
+    )
+    pages = db.execute(
+        'Select * \
+        FROM uniPage \
+        WHERE pageID = "1"'
+    )
+    sections = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID ="1" OR contentID="2"')
+    return render_template('general/campusServicesDB.html', contents=contents, pages=pages, sections=sections)
 
 
 @bp.route('/essentials', methods=('GET', 'POST'))
