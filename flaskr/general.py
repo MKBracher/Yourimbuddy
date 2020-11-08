@@ -26,11 +26,6 @@ def campusServices():
         FROM content\
         WHERE pageID = "1"'
     )
-    contents2 = db.execute(
-        'SELECT * \
-        FROM content\
-        WHERE pageID = "1" AND contentID = "2"'
-    )
     pages = db.execute(
         'Select * \
         FROM uniPage \
@@ -45,12 +40,46 @@ def campusServices():
         FROM section \
         WHERE contentID = "2"')
     
-    return render_template('general/campusServicesDB.html', contents=contents, pages=pages, sections=sections, sections2=sections2, contents2=contents2)
+    return render_template('general/campusServices.html', contents=contents, pages=pages, sections=sections, sections2=sections2, contents2=contents2)
 
 
 @bp.route('/essentials', methods=('GET', 'POST'))
 def studyEssentials():
-    return render_template('general/studyEssentials.html')
+    db = get_db()
+    contents = db.execute(
+        'SELECT * \
+        FROM content\
+        WHERE pageID = "2"'
+    )
+    pages = db.execute(
+        'Select * \
+        FROM uniPage \
+        WHERE pageID = "2"'
+    )
+    sections3 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "3"')
+    sections4 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "4"')
+    sections5 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "5"'
+    )
+    sections6 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "6"'
+    )
+    sections7 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "7"'
+    )
+    return render_template('general/studyEssentialsDB.html',contents=contents, pages=pages, sections4=sections4, sections3=sections3, sections5=sections5, sections6=sections6, sections7=sections7)
     
 @bp.route('/FAQ', methods=('GET', 'POST'))
 def FAQ():
