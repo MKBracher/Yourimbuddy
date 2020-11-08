@@ -1,14 +1,32 @@
+DROP TABLE IF EXISTS studentMember;
+DROP TABLE IF EXISTS staffMember;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS degree;
 DROP TABLE IF EXISTS course;
 DROP TABLE IF EXISTS memberCourse;
-DROP TABLE IF EXISTS student;
-DROP TABLE IF EXISTS staff;
 DROP TABLE IF EXISTS uniPage;
 DROP TABLE IF EXISTS content;
 DROP TABLE IF EXISTS section;
 
+CREATE TABLE studentMember(
+    studentID   CHAR(8) UNIQUE  NOT NULL,
+    memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
+    completedCourses    VARCHAR(2000),
+    FOREIGN KEY (memberID) REFERENCES member(memberID) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+CREATE TABLE staffMember(
+    staffID     CHAR(6) UNIQUE  NOT NULL,
+    memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
+    isAdmin    INTEGER         DEFAULT 0,
+    FOREIGN KEY (memberID) REFERENCES member(memberID) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+CREATE TABLE degree (
+    degreeID   INTEGER         PRIMARY KEY AUTOINCREMENT,
+    degreeName  VARCHAR(100)   UNIQUE
+);
 
 CREATE TABLE member (
     memberID    INTEGER         PRIMARY KEY AUTOINCREMENT,
@@ -18,21 +36,6 @@ CREATE TABLE member (
     degreeID    INTEGER NULL    REFERENCES degree(degreeID),
     phNumber    VARCHAR(20),
     email       VARCHAR(200)    UNIQUE  NOT NULL    
-);
-
-CREATE TABLE student(
-    studentID   CHAR(8) UNIQUE  NOT NULL,
-    completedCourses    VARCHAR(2000)
-);
-
-CREATE TABLE staff (
-    staffID     CHAR(6) UNIQUE  NOT NULL,
-    isAdmin    INTEGER         DEFAULT 0
-);
-
-CREATE TABLE degree (
-    degreeID   INTEGER         PRIMARY KEY AUTOINCREMENT,
-    degreeName  VARCHAR(100)   UNIQUE
 );
 
 CREATE TABLE course (
@@ -60,12 +63,12 @@ CREATE TABLE question(
     FOREIGN KEY (authorID)     REFERENCES member(memberID)
 );
 
-
 CREATE TABLE uniPage(
     pageID  INTEGER NOT NULL,
     pageName            VARCHAR(50)    NOT NULL,
     PRIMARY KEY (pageID)
 );
+
 
 CREATE TABLE content(
     pageID              INTEGER        NOT NULL,
@@ -75,6 +78,7 @@ CREATE TABLE content(
     FOREIGN KEY (pageID) REFERENCES uniPage(pageID) ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
+
 CREATE TABLE section(
     sectionID           INTEGER         NOT NULL,
     contentID           INTEGER         NOT NULL,
@@ -83,6 +87,9 @@ CREATE TABLE section(
     PRIMARY KEY (sectionID),
     FOREIGN KEY (contentID) REFERENCES content(contentID) ON UPDATE CASCADE ON DELETE NO ACTION
 );
+
+
+
 
 INSERT INTO uniPage VALUES ('1', 'Campus Services'),
 ('2', 'Study Essentials'),
