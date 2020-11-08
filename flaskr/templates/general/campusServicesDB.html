@@ -23,21 +23,24 @@
                                 <article class="post">
                                     <h5><b>{{ content['contentHead'] }} {{content['contentID']}}</b></h5>
                                     <!-- Need to work out how to get this for loop to restart on second loop -->
+                                        {% set cnt = [0] %}
                                         {% for section in sections %}
-                                            
+                                            {% if cnt.append(cnt.pop() + 1) %}{% endif %}
                                             <br>{{section['contentID']}}
                                             <b>{{section['sectionSubTitle']}}</b>
                                             <br>
+                                                
                                                 {{section['sectionDescription']}}
                                             <br>
-                                            
+                                        {{ cnt[0] }}   
                                         {% endfor %}
+                                        total times through = {{ cnt[0] }}
                                 </article>        
                     </div>
                                         
                 </header>
-          
-                
+            
+        
         {% endfor %}
         
 {% endblock %}
