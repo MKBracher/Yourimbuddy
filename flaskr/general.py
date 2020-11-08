@@ -21,10 +21,10 @@ def index():
 @bp.route('/services', methods=('GET', 'POST'))
 def campusServices():
     db = get_db()
-    contents1 = db.execute(
+    contents = db.execute(
         'SELECT * \
         FROM content\
-        WHERE pageID = "1" AND contentID = "1"'
+        WHERE pageID = "1"'
     )
     contents2 = db.execute(
         'SELECT * \
@@ -36,16 +36,16 @@ def campusServices():
         FROM uniPage \
         WHERE pageID = "1"'
     )
-    sections1 = db.execute(
+    sections = db.execute(
         'SELECT * \
         FROM section \
-        WHERE contentID = "1"')
+        WHERE contentID IN ("1", "2")')
     sections2 = db.execute(
         'SELECT * \
         FROM section \
         WHERE contentID = "2"')
     
-    return render_template('general/campusServicesDB.html', contents1=contents1, pages=pages, sections1=sections1, sections2=sections2, contents2=contents2)
+    return render_template('general/campusServicesDB.html', contents=contents, pages=pages, sections=sections, sections2=sections2, contents2=contents2)
 
 
 @bp.route('/essentials', methods=('GET', 'POST'))
