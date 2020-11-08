@@ -15,31 +15,54 @@
        <h5> Campus Map</h5>
     <img class = "card-img-top" src="../static/images/OurimbahMap.jpg" alt="Map Of Ourimbah Campus"></div></div>
   
-        {% for content in contents %}
-        
+        {% for content in contents1 %}
                 <header>
                     <div>
                         <div class="card">
                             <div class="card-body">
                                 <article class="post">
-                                    <h5><b>{{ content['contentHead'] }}</b></h5>
-                                    <!-- if section['sectionID'] == content['contentID']% -->
-                                        {% for section in sections %}
+                                    <h5><b>{{ content['contentHead'] }} {{content['contentID']}}</b></h5>
+                                    <!-- Need to work out how to get this for loop to restart on second loop -->
+                                        {% for section in sections1 if section['contentID'] == content['contentID'] %}
                                             
-                                                <br>
-                                                
-                                                    <b>{{section['sectionSubTitle']}}</b>
-                                                        <br>
-                                                        {{section['sectionDescription']}}
-                                                        <br>
-                                                
+                                            <br>{{section['contentID']}}
+                                            <b>{{section['sectionSubTitle']}}</b>
+                                            <br>
+                                                {{section['sectionDescription']}}
+                                            <br>
                                             
                                         {% endfor %}
+                                        
                     </div>
-            
+                                        
                 </header>
           
                 
         {% endfor %}
+        {% for content in contents2 %}
+        <header>
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <article class="post">
+                            <h5><b>{{ content['contentHead'] }} {{content['contentID']}}</b></h5>
+                            <!-- Need to work out how to get this for loop to restart on second loop -->
+                                {% for section in sections2 if section['contentID'] == content['contentID'] %}
+                                    
+                                    <br>{{section['contentID']}}
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <br>
+                                        {{section['sectionDescription']}}
+                                    <br>
+                                    
+                                {% endfor %}
+                                
+            </div>
+                                
+        </header>
+  
+        
+{% endfor %}
+        
 {% endblock %}
 
