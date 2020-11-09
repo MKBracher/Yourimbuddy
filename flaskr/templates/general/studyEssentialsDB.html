@@ -33,11 +33,12 @@
                                 <h5><b>{{ content['contentHead'] }}</b></h5>
                             
                                 {% for section in sections7 %}
-                                  <b>{{section['sectionSubTitle']}}</b>
-                                  <br>
-                                      {{section['sectionDescription']}}
-                                  <br>  
-                                  <br>
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
                                  {% endfor %}
 
         {%else%}
@@ -98,11 +99,6 @@
                                  {% endfor %}
                              {% endif %}
 
-                             {% if content['contentID'] == 7 %}
-                             
-                                 
-                                 
-                             {% endif %}
                      </article>        
             </div>
                              
