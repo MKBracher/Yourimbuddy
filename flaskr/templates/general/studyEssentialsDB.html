@@ -92,11 +92,13 @@
                             {% endif %}
 
                              {% if content['contentID'] == 6 %}
-                                 {% for section in sections6 %}
+                                <ul> 
+                                {% for section in sections6 %}
                                   <b>{{section['sectionSubTitle']}}</b>
                                      <li>{{section['sectionDescription']}} </li>
                                     
                                  {% endfor %}
+                                </ul>
                              {% endif %}
 
                      </article>        
