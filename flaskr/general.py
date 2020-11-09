@@ -97,31 +97,31 @@ def FAQ():
         WHERE pageID = "4"'
     )
     
-    sections8 = db.execute(
-        'SELECT * \
-        FROM section \
-        WHERE contentID = "8"')
-    
-    sections9 = db.execute(
-        'SELECT * \
-        FROM section \
-        WHERE contentID = "9"')
-    sections10 = db.execute(
-       'SELECT * \
-       FROM section \
-       WHERE contentID = "10"'
-    )
     sections11 = db.execute(
-       'SELECT * \
-       FROM section \
-       WHERE contentID = "11"'
-    )
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "11"')
+    
     sections12 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "12"')
+    sections13 = db.execute(
        'SELECT * \
        FROM section \
-       WHERE contentID = "12"'
+       WHERE contentID = "13"'
     )
-    return render_template('general/FAQDB.html', contents=contents, pages=pages, sections8=sections8, sections9=sections9, sections10=sections10, sections11=sections11, sections12=sections12)
+    sections14 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "14"'
+    )
+    sections15 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "15"'
+    )
+    return render_template('general/FAQDB.html', contents=contents, pages=pages, sections11=sections11, sections12=sections12, sections13=sections13, sections14=sections14, sections15=sections15)
 
 @bp.route('/account', methods=('GET', 'POST'))
 @login_required

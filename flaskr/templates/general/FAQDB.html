@@ -9,104 +9,78 @@
 {% block content %}
  
  
- 
-<div class="card-columns">
- <div class="card">
-   <img src="../static/images/LibraryShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
- </div>
- 
 
-
-
- 
+    <header>
+        <div>
+           <div class="card">
+                <div class="card-body">
+                   <article class="post">
     
     {% for content in contents %}
-        {%if content['contentID'] == 7 %}
-            <div class="card">
-                <img src="../static/images/WalkwayShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
-            </div>
-            <header>
-                <div>
-                    <div class="card">
-                        <div class="card-body">
-                            <article class="post">
+        
+        {%if content['contentID'] == 11 %}
+            
                                 <h5><b>{{ content['contentHead'] }}</b></h5>
                             
-                                {% for section in sections7 %}
+                                {% for section in sections11 %}
                                     <div class="section">{{section|safe}}</div>
-                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <b>{{section['sectionSubTitle']|safe}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
+                                 {% endfor %}
+        {%elif content['contentID'] == 12 %}
+          
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections12 %}
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']|safe}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
+                                 {% endfor %}
+        {%elif content['contentID'] == 13 %}
+            
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections13 %}
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']|safe}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
+                                 {% endfor %}
+        {%elif content['contentID'] == 14 %}
+            
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections14 %}
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']|safe}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
+                                 {% endfor %}
+        {%elif content['contentID'] == 15 %}
+           
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections15 %}
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']|safe}}</b>
                                     <br>
                                       {{section['sectionDescription']|safe}}
                                     <br>  
                                     <br>
                                  {% endfor %}
 
-        {%else%}
-        <header>
-        <div>
-             <div class="card">
-                 <div class="card-body">
-                     <article class="post">
-                         <h5><b>{{ content['contentHead'] }}</b></h5>
-                             
-                            {% if content['contentID'] == 3 %}
-                                {% for section in sections3 %}
-                                    
-                                    <b>{{section['sectionSubTitle']}}</b>
-                                    <br>
-                                    {{section['sectionDescription']}}
-                                    <br>
-                                    <br>
-                                 {% endfor %}
-                             {% endif %}
-                             
-                             {% if content['contentID'] == 4 %}
-                                 {% for section in sections4 %}
-                                     <br>
-                                  <b>{{section['sectionSubTitle']}}</b>
-                                  <br>
-                                      {{section['sectionDescription']}}
-                                  <br>  
-                                 {% endfor %}
-                             {% endif %}
-                             
-                            {% if content['contentID'] == 5 %}
-                            {% for section in sections5 %}
-                                 
-                                {% if section['sectionSubTitle'] == 'What a typical semester looks like' %}
-                                    <b>{{section['sectionSubTitle']}}</b>
-                                    {{section['sectionDescription']}}
-                                {% elif section['sectionID'] == 9 %}
-                                    {{section['sectionDescription']}}
-                                    <br>
-                                {% elif section['sectionSubTitle'] == ''%}
-                                    <li>{{section['sectionDescription']}}</li>
-                                    
-                                {%else%}
-                                <br>
-                                    <b>{{section['sectionSubTitle']}}</b>
-                                <br>
-                                <ol>
-                                   <li>{{section['sectionDescription']}}</li>
-                                
-                                {%endif%}
-                            {% endfor %}
-                            {% endif %}
+        
 
-                             {% if content['contentID'] == 6 %}
-                                <ul> 
-                                {% for section in sections6 %}
-                                  <b>{{section['sectionSubTitle']}}</b>
-                                     <li>{{section['sectionDescription']}} </li>
-                                    
-                                 {% endfor %}
-                                </ul>
-                             {% endif %}
-
-                     </article>        
-            </div>
-                             
-         </header>
  
         {%endif%}
     {% endfor %}          
