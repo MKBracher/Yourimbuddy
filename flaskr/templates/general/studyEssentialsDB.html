@@ -75,19 +75,21 @@
                                  
                                 {% if section['sectionSubTitle'] == 'What a typical semester looks like' %}
                                     <b>{{section['sectionSubTitle']}}</b>
-                                    <br>
                                     {{section['sectionDescription']}}
-                                
+                                {% elif section['sectionID'] == 9 %}
+                                    {{section['sectionDescription']}}
+                                    <br>
                                 {% elif section['sectionSubTitle'] == ''%}
-                                    {{section['sectionDescription']}}
-                                    <br>
+                                    <li>{{section['sectionDescription']}}</li>
+                                    
                                 {%else%}
                                 <br>
                                     <b>{{section['sectionSubTitle']}}</b>
                                 <br>
-                                    {{section['sectionDescription']}}
-                                <br>
-                                {%endif%}  
+                                <ol>
+                                   <li>{{section['sectionDescription']}}</li>
+                                
+                                {%endif%}
                             {% endfor %}
                             {% endif %}
 
