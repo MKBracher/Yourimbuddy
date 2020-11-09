@@ -14,14 +14,35 @@
  <div class="card">
    <img src="../static/images/LibraryShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
  </div>
-  
-     <div class="card">
-       <img src="../static/images/WalkwayShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
-     </div>
-        
-     {% for content in contents %}
-     <header>
-         <div>
+ 
+
+
+
+ 
+    
+    {% for content in contents %}
+        {%if content['contentID'] == 7 %}
+            <div class="card">
+                <img src="../static/images/WalkwayShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+            </div>
+            <header>
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <article class="post">
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections7 %}
+                                  <b>{{section['sectionSubTitle']}}</b>
+                                  <br>
+                                      {{section['sectionDescription']}}
+                                  <br>  
+                                  <br>
+                                 {% endfor %}
+
+        {%else%}
+        <header>
+        <div>
              <div class="card">
                  <div class="card-body">
                      <article class="post">
@@ -29,13 +50,12 @@
                              
                             {% if content['contentID'] == 3 %}
                                 {% for section in sections3 %}
-                                    <br>
+                                    
                                     <b>{{section['sectionSubTitle']}}</b>
                                     <br>
-                                    
                                     {{section['sectionDescription']}}
                                     <br>
-                                 
+                                    <br>
                                  {% endfor %}
                              {% endif %}
                              
@@ -51,40 +71,45 @@
                              
                             {% if content['contentID'] == 5 %}
                             {% for section in sections5 %}
-                                 <br>
-                              <b>{{section['sectionSubTitle']}}</b>
-                              <br>
-                                  {{section['sectionDescription']}}
-                              <br>  
+                                 
+                                {% if section['sectionSubTitle'] == 'What a typical semester looks like' %}
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <br>
+                                    {{section['sectionDescription']}}
+                                
+                                {% elif section['sectionSubTitle'] == ''%}
+                                    {{section['sectionDescription']}}
+                                    <br>
+                                {%else%}
+                                <br>
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                <br>
+                                    {{section['sectionDescription']}}
+                                <br>
+                                {%endif%}  
                             {% endfor %}
                             {% endif %}
 
                              {% if content['contentID'] == 6 %}
                                  {% for section in sections6 %}
-                                     <br>
                                   <b>{{section['sectionSubTitle']}}</b>
-                                  <br>
-                                      {{section['sectionDescription']}}
-                                  <br>  
+                                     <li>{{section['sectionDescription']}} </li>
+                                    
                                  {% endfor %}
                              {% endif %}
 
                              {% if content['contentID'] == 7 %}
-                                 {% for section in sections7 %}
-                                     <br>
-                                  <b>{{section['sectionSubTitle']}}</b>
-                                  <br>
-                                      {{section['sectionDescription']}}
-                                  <br>  
-                                 {% endfor %}
+                             
+                                 
+                                 
                              {% endif %}
                      </article>        
-         </div>
+            </div>
                              
-     </header>
+         </header>
  
-
-        {% endfor %}          
+        {%endif%}
+    {% endfor %}          
  </div>
  
  

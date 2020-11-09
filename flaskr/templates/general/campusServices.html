@@ -38,9 +38,10 @@
                                         {% if content['contentID'] == 2 %}
                                             {% for section in sections2 %}
                                                 <br>
+                                                <div class="section">{{section|safe}}</div>
                                              <b>{{section['sectionSubTitle']}}</b>
                                              <br>
-                                                 {{section['sectionDescription']}}
+                                                 {{section['sectionDescription']|safe}}
                                              <br>  
                                             {% endfor %}
                                         {% endif %}

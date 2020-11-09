@@ -40,7 +40,7 @@ def campusServices():
         FROM section \
         WHERE contentID = "2"')
     
-    return render_template('general/campusServices.html', contents=contents, pages=pages, sections=sections, sections2=sections2, contents2=contents2)
+    return render_template('general/campusServices.html', contents=contents, pages=pages, sections=sections, sections2=sections2)
 
 
 @bp.route('/essentials', methods=('GET', 'POST'))
