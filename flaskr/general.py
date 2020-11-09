@@ -56,10 +56,12 @@ def studyEssentials():
         FROM uniPage \
         WHERE pageID = "2"'
     )
+    
     sections3 = db.execute(
         'SELECT * \
         FROM section \
         WHERE contentID = "3"')
+    
     sections4 = db.execute(
         'SELECT * \
         FROM section \
@@ -83,7 +85,43 @@ def studyEssentials():
     
 @bp.route('/FAQ', methods=('GET', 'POST'))
 def FAQ():
-    return render_template('general/FAQ.html')
+    db = get_db()
+    contents = db.execute(
+        'SELECT * \
+        FROM content\
+        WHERE pageID = "4"'
+    )
+    pages = db.execute(
+        'Select * \
+        FROM uniPage \
+        WHERE pageID = "4"'
+    )
+    
+    sections8 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "8"')
+    
+    sections9 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "9"')
+    sections10 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "10"'
+    )
+    sections11 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "11"'
+    )
+    sections12 = db.execute(
+       'SELECT * \
+       FROM section \
+       WHERE contentID = "12"'
+    )
+    return render_template('general/FAQDB.html', contents=contents, pages=pages, sections8=sections8, sections9=sections9, sections10=sections10, sections11=sections11, sections12=sections12)
 
 @bp.route('/account', methods=('GET', 'POST'))
 @login_required
