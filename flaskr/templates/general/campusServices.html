@@ -14,36 +14,51 @@
        <div class="card-body">
        <h5> Campus Map</h5>
     <img class = "card-img-top" src="../static/images/OurimbahMap.jpg" alt="Map Of Ourimbah Campus"></div></div>
-  
+    
         {% for content in contents %}
                 <header>
-                    <div>
-                        <div class="card">
-                            <div class="card-body">
-                                <article class="post">
-                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                
                                         
                                         {% if content['contentID'] == 1 %}
-                                            {% for section in sections if content['contentID'] == section['contentID'] %}
-                                                <br>
-                                                <b>{{section['sectionSubTitle']}}</b>
-                                                <br>
-                                                
-                                                 {{section['sectionDescription']}}
-                                                <br>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <article class="post">
+                                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                                                    {% for section in sections if content['contentID'] == section['contentID'] %}
+                                                        <br>
+                                                        <b>{{section['sectionSubTitle']}}</b>
+                                                        <br>
+
+                                                         {{section['sectionDescription']}}
+                                                        <br>
                                             
-                                            {% endfor %}
+                                                    {% endfor %}
+                                                    </article>
+                                                    </div>
+                                                    <div>
+
+                                                    </div>
+                                                    
                                         {% endif %}
                                         
                                         {% if content['contentID'] == 2 %}
-                                            {% for section in sections2 %}
-                                                <br>
-                                                <div class="section">{{section|safe}}</div>
-                                             <b>{{section['sectionSubTitle']}}</b>
-                                             <br>
-                                                 {{section['sectionDescription']|safe}}
-                                             <br>  
-                                            {% endfor %}
+                                            <div class="card">
+                                                <img src="../static/images/ClassroomShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+                                            </div>
+                                            <div class="card">
+                                              <img src="../static/images/LibraryBackShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <article class="post">
+                                                    {% for section in sections2 %}
+                                                            <br>
+                                                            <div class="section">{{section|safe}}</div>
+                                                            <b>{{section['sectionSubTitle']}}</b>
+                                                            <br>
+                                                           {{section['sectionDescription']|safe}}
+                                                           <br>  
+                                                   {% endfor %}
                                         {% endif %}
                                 </article>        
                     </div>
