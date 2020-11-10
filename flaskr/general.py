@@ -39,8 +39,12 @@ def campusServices():
         'SELECT * \
         FROM section \
         WHERE contentID = "2"')
+    sections16 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "16"')
     
-    return render_template('general/campusServices.html', contents=contents, pages=pages, sections=sections, sections2=sections2)
+    return render_template('general/campusServices.html', contents=contents, pages=pages, sections=sections, sections2=sections2, sections16=sections16)
 
 
 @bp.route('/essentials', methods=('GET', 'POST'))
