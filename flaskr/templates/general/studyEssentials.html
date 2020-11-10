@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
  
 {% block header %}
- <h1>{% block title %}Study Essentials{% endblock %}</h1>
+    {% for page in pages %}
+        <header><h1>{{page['pageName']}}</h1></header>
+    {% endfor %}
 {% endblock %}
- 
  
 {% block content %}
  
@@ -13,112 +14,102 @@
  <div class="card">
    <img src="../static/images/LibraryShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
  </div>
-   <div class="card">
-     <div class="card-body">
-       <h4 class="card-title">Your First Day</h4>
-       <h5>O-Week</h5>
-       <p class="card-text">O Week is a great way to get involved in activities with your
-           soon-to-be fellow cohort. It is generally held the week before the
-           Uni Semester starts or Week 1, hence the name "O week". You can
-           check out all the student clubs so that you can meet people with
-           similar interests.</p>
-           <h5>Program Sessions</h5>
-           <p>
-               Orientation also involves attending your program session, where you will
-           receive information about how your degree is structured, some things to
-           expect from it, as well as some tips on how to successfully nail Uni!
-           You will also be able to pick up your student card, which grants you
-           access to the library, your library account, many other Uni services
-           our required identification when sitting for your exams.
-           </p>
-     </div>
-   </div>
  
-   <div class="card">
-     <div class="card-body">
-       <h4 class="card-title">Your Degree</h4>
-       <h5>Where to get program advice</h5>
-      
-       <p class="card-text">
-         <ul><li>Your Academic Program Advisor has detailed knowledge about the requirements of your program.
-                   They can assist you with program variations due to changes in your circumstances and changes within your program.</li>
-             <li>The best way to contact your Academic Program Advisor is via email:<br>
-                   <u>ProgramAdvice@newcastle.edu.au</u><br></li>
-             <li>Academic Program Advisors are also accessible via Student Central on campus and <br>
-                   appointments can be made for more detailed advice.</li>
- </ul>
-       </p>
-     </div>
-   </div>
+
+
+
  
-   <div class="card">
-       <div class="card-body">
-         <h4 class="card-title">What a typical semester looks like</h4>
-         <p>Studying at university means you’ll have complete freedom to plan out your
-           study timetable and complete assignments in your own time.<br>
-           There are plenty of ways you can reach out for guidance and support
-           throughout your degree, especially when you're feeling overwhelmed.</p>
-         <h5>Your First Semester Roadmap</h5>
-         <p class="card-text">
-           <ol>
-             <li> Set yourself up for your studies with our guide for new students.
-               Find out what you need to know, from planning your course to logging into University systems.</li>
-               <li> Check out our libraries. Our expert librarians can assist you with all aspects of research and learning.</li>
-             <li> Book a workshop. Newcastle University's NUPrep offers FREE academic preparation and support for all University
-               of Newcastle Students in the weeks leading up to each semester. Our courses will introduce you to learning
-               content and completing assessment items in a similar format to your Undergraduate or Enabling Pathways program. </li> 
-             <li> Seminars on a range of skills, including academic writing, how to research and plan an essay, and how to
-               take better notes in class. </li>
-             <li> Get active with Newcastle Uni Sports & the Gym. You don’t need to splurge on a gym membership to get moving. Our
-               gym facilities are free to use for University students or you can select to join in on our group sports!</li>
-         </ol></p>
-       </div>
-     </div>
     
-     <div class="card">
-       <div class="card-body">
-         <h4 class="card-title">Second Hand Textbooks</h4>
-         <p class="card-text">
-           - Your <u>Course Coordinators and Lecturers</u> will supply you with a list of the textbooks,
-           readings and other resources that are prescribed for your courses at your first lecture/class.<br>
-           - We strongly encourage students to wait for their first class for their lecturers to inform them
-           of the appropriate textbooks as they may have change or may require different ones. <br>
-           - From here you can choose to purchase the text online, from a book store, or from online second
-           hand textbook sites.
-       </div>
-     </div>
+    {% for content in contents %}
+        {%if content['contentID'] == 7 %}
+            <div class="card">
+                <img src="../static/images/WalkwayShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+            </div>
+            <header>
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <article class="post">
+                                <h5><b>{{ content['contentHead'] }}</b></h5>
+                            
+                                {% for section in sections7 %}
+                                    <div class="section">{{section|safe}}</div>
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <br>
+                                      {{section['sectionDescription']|safe}}
+                                    <br>  
+                                    <br>
+                                 {% endfor %}
+
+        {%else%}
+        <header>
+        <div>
+             <div class="card">
+                 <div class="card-body">
+                     <article class="post">
+                         <h5><b>{{ content['contentHead'] }}</b></h5>
+                             
+                            {% if content['contentID'] == 3 %}
+                                {% for section in sections3 %}
+                                    
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    <br>
+                                    {{section['sectionDescription']}}
+                                    <br>
+                                    <br>
+                                 {% endfor %}
+                             {% endif %}
+                             
+                             {% if content['contentID'] == 4 %}
+                                 {% for section in sections4 %}
+                                     <br>
+                                  <b>{{section['sectionSubTitle']}}</b>
+                                  <br>
+                                      {{section['sectionDescription']}}
+                                  <br>  
+                                 {% endfor %}
+                             {% endif %}
+                             
+                            {% if content['contentID'] == 5 %}
+                            {% for section in sections5 %}
+                                 
+                                {% if section['sectionSubTitle'] == 'What a typical semester looks like' %}
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                    {{section['sectionDescription']}}
+                                {% elif section['sectionID'] == 9 %}
+                                    {{section['sectionDescription']}}
+                                    <br>
+                                {% elif section['sectionSubTitle'] == ''%}
+                                    <li>{{section['sectionDescription']}}</li>
+                                    
+                                {%else%}
+                                <br>
+                                    <b>{{section['sectionSubTitle']}}</b>
+                                <br>
+                                <ol>
+                                   <li>{{section['sectionDescription']}}</li>
+                                
+                                {%endif%}
+                            {% endfor %}
+                            {% endif %}
+
+                             {% if content['contentID'] == 6 %}
+                                <ul> 
+                                {% for section in sections6 %}
+                                  <b>{{section['sectionSubTitle']}}</b>
+                                     <li>{{section['sectionDescription']}} </li>
+                                    
+                                 {% endfor %}
+                                </ul>
+                             {% endif %}
+
+                     </article>        
+            </div>
+                             
+         </header>
  
-     <div class="card">
-       <img src="../static/images/WalkwayShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
-     </div>
-        <div class="card">
-           <div class="card-body">
-             <h4 class="card-title">Exam Advice</h4>
-             <h5>Where to get program advice</h5>
-             <p class="card-text">
-               Preparation is the key to a successful exam period,
-               so make sure you’ve got your dates and times locked in, then plan your study based on that information.<br>
-             As for the best ways to study for exams, UON’s Centre for Teaching and Learning has some handy pointers:<br>
-               <a href="https://www.newcastle.edu.au/__data/assets/pdf_file/0006/333807/Top-tips-for-studying-for-exams-lv-from-web.pdf">Tips for studying for exams</a> <br>
-               <a href="https://www.newcastle.edu.au/__data/assets/pdf_file/0011/333758/Exam-Strategies-lv-from-web.pdf">Exam Strategies</a><br>
-               <a href="https://www.newcastle.edu.au/__data/assets/pdf_file/0003/355692/LD-resource-sheet-open-book-exams-how-to-build-a-memory-aid.pdf">How to build a memory aid</a><br>
-               <h5>Memory Aids</h5>
-               The University of Newcastle has an open book policy for exams. Except for some exemptions, the memory aid is the
-               minimum allowed for exams, but some courses will allow for more than the memory aid.
-               Always check your course outlines so that you know exactly what you can bring into each exam.
-               <br>Unless stated otherwise, a memory aid is 1 x A4 double-sided sheet of any type of notes, handwritten or
-               otherwise. It can be on coloured paper and can contain diagrams.
-               <br>What to bring:
-               <li>Most importantly, your Student ID, Driver's License or passport to all exams</li>
-               <li>Pens or pencils</li>
-               <li>Erasers</li>
-               <li>A clear water bottle</li>
-               <li>Tissues</li>
-             </p>
-           </div>
-           </div>  
- 
-          
+        {%endif%}
+    {% endfor %}          
  </div>
  
  

@@ -16,7 +16,30 @@ bp = Blueprint('general', __name__, template_folder='templates')
 
 @bp.route('/')
 def index():
-    return render_template('general/index.html')
+    db = get_db()
+    contents = db.execute(
+        'SELECT * \
+        FROM content\
+        WHERE pageID = "3"'
+    )
+    pages = db.execute(
+        'Select * \
+        FROM uniPage \
+        WHERE pageID = "3"'
+    )
+    sections8 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "8"')
+    sections9 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "9"')
+    sections10 = db.execute(
+        'SELECT * \
+        FROM section \
+        WHERE contentID = "10"')    
+    return render_template('general/index.html', contents=contents, pages=pages, sections8=sections8, sections9=sections9, sections10=sections10)
 
 @bp.route('/services', methods=('GET', 'POST'))
 def campusServices():
@@ -85,7 +108,7 @@ def studyEssentials():
        FROM section \
        WHERE contentID = "7"'
     )
-    return render_template('general/studyEssentialsDB.html',contents=contents, pages=pages, sections4=sections4, sections3=sections3, sections5=sections5, sections6=sections6, sections7=sections7)
+    return render_template('general/studyEssentials.html',contents=contents, pages=pages, sections4=sections4, sections3=sections3, sections5=sections5, sections6=sections6, sections7=sections7)
     
 @bp.route('/FAQ', methods=('GET', 'POST'))
 def FAQ():
@@ -125,7 +148,7 @@ def FAQ():
        FROM section \
        WHERE contentID = "15"'
     )
-    return render_template('general/FAQDB.html', contents=contents, pages=pages, sections11=sections11, sections12=sections12, sections13=sections13, sections14=sections14, sections15=sections15)
+    return render_template('general/FAQ.html', contents=contents, pages=pages, sections11=sections11, sections12=sections12, sections13=sections13, sections14=sections14, sections15=sections15)
 
 @bp.route('/account', methods=('GET', 'POST'))
 @login_required

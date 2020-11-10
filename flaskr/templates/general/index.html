@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
 <div id="carouselExampleIndicators"  class="carousel slide" data-ride="carousel" style="padding-bottom: 5%;">
   <ol class="carousel-indicators">
@@ -33,33 +29,81 @@
 </div>
 
 <div class="card-deck text-center">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Campus Services</h5>
-      <p class="card-text">Click here to go to our campus services page and find out all the amazing services that Newcastle University has to offer!</p>
-    </div>
-    <div class="card-footer">
-      <a href="{{url_for('general.campusServices')}}" class="btn btn-outline-info" role="button">Campus Services</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Study Essentials</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-    </div>
-    <div class="card-footer">
-      <a href="{{url_for('general.studyEssentials')}}" class="btn btn-outline-info" role="button">Study Essentials</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Frequently Asked Questions</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-    </div>
-    <div class="card-footer">
-      <a href="{{url_for('general.FAQ')}}" class="btn btn-outline-info" role="button">FAQ</a>
-    </div>
-  </div>
+  {% for content in contents %}
+  
+    {% if content['contentID'] == 8 %}
+      {% for section in sections8 %}
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ content['contentHead'] }}</h5>
+           
+      
+            
+            <b>{{section['sectionSubTitle']}}</b>
+            {{section['sectionDescription']|safe}}
+              
+            <br>
+            <br>
+
+            <a href="{{url_for('general.campusServices')}}" class="btn btn-outline-info" role="button">{{ content['contentHead'] }}</a>
+            
+            
+        </div>
+        </div>
+      
+      {% endfor %}
+    {%endif%}
+    {% if content['contentID'] == 9 %}
+      {% for section in sections9 %}
+      
+        <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">{{ content['contentHead'] }}</h5>
+           
+      
+            
+            <b>{{section['sectionSubTitle']}}</b>
+            
+              {{section['sectionDescription']|safe}}
+              
+            <br>
+            <br>
+            <a href="{{url_for('general.studyEssentials')}}" class="btn btn-outline-info" role="button">{{ content['contentHead'] }}</a>
+            
+            
+        </div>
+        </div>
+            
+      {% endfor %}
+    {% endif %}
+    {% if content['contentID'] == 10 %}
+      {% for section in sections10 %}
+      
+        <div class="card">
+        <div class="card-body">
+          
+        <h5 class="card-title">{{ content['contentHead'] }}</h5>
+           
+      
+            
+            <b>{{section['sectionSubTitle']}}</b>
+            
+              {{section['sectionDescription']|safe}}
+              
+            <br>
+            <br>
+            <a href="{{url_for('general.FAQ')}}" class="btn btn-outline-info" role="button">{{ content['contentHead'] }}</a>
+            
+            
+        </div>
+        </div>
+      
+      {% endfor %}
+    {% endif %}
+
+  {% endfor %}
 </div>
+
+
 
 {% endblock %}
