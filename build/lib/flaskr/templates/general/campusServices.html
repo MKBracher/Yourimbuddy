@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+ 
+{% block header %}
+    {% for page in pages %}
+        <header><h1>{{page['pageName']}}</h1></header>
+    {% endfor %}
+{% endblock %}
+ 
+{% block content %}
+ 
+<div class="card-columns">
+ 
+   <div class="card">
+       <div class="card-body">
+       <h5> Campus Map</h5>
+    <img class = "card-img-top" src="../static/images/OurimbahMap.jpg" alt="Map Of Ourimbah Campus"></div></div>
+    
+        {% for content in contents %}
+                                        
+                                        {% if content['contentID'] == 1 %}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <article class="post">
+                                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                                                    {% for section in sections if content['contentID'] == section['contentID'] %}
+                                                        <br>
+                                                        <b>{{section['sectionSubTitle']}}</b>
+                                                        <br>
+
+                                                         {{section['sectionDescription']}}
+                                                        <br>
+                                            
+                                                    {% endfor %}
+                                                    </article>
+                                                    </div>
+                                                    <div>
+
+                                                    </div>
+                                        {% endif %}           
+                                        
+                                        
+                                        {% if content['contentID'] == 2 %}
+                                            <div class="card">
+                                                <img src="../static/images/ClassroomShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <article class="post">
+                                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                                                    {% for section in sections2 %}
+                                                            <br>
+                                                            
+                                                            <b>{{section['sectionSubTitle']}}</b>
+                                                            <br>
+                                                           {{section['sectionDescription']|safe}}
+                                                           <br>  
+                                                   {% endfor %}
+                                                    </div>
+                                                
+                                            
+                                        {% endif %}
+
+                                        {% if content['contentID'] == 16 %}
+                                            
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <article class="post">
+                                                    <h5><b>{{ content['contentHead'] }}</b></h5>
+                                                        {% for section in sections16 %}
+                                                        
+                                                        
+                                                             {{section['sectionDescription']}}
+                                                        <br>
+                                                        
+                                            
+                                                        {% endfor %}
+                                                    </article>
+                                                    </div>
+                                                    <div>
+
+                                                    </div>
+                                            </div>
+                                            <div class="card">
+                                                <img src="../static/images/LibraryBackShot.jpg" class="card-img-top" alt="Nice pictures to break up the monotany">
+                                            </div>
+                                        {% endif %}
+                                        
+                                </article>        
+                    </div>
+                                        
+                </header>
+            
+        
+        {% endfor %}
+</div>        
+{% endblock %}
+
