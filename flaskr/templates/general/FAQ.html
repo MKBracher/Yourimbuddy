@@ -14,10 +14,10 @@
     {% for content in contents %}
     
         {%if content['contentID'] == 11 %}
-        
+        <br>
         <h5><strong>{{ content['contentHead'] }}</strong></h5>
                                
-                            <br>
+                           
                                 {% for section in sections11 %}
                                   
                                   <div id="accordion">
@@ -25,7 +25,7 @@
                                       <div class="card-header" id="heading{{ loop.index }}">
                                         <h5 class="mb-0">
                                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
-                                            <b><a id = "target{{loop.index}}">{{section['sectionSubTitle']|safe}} </b></a>
+                                            <b><a id = "{{loop.index}}">{{section['sectionSubTitle']|safe}} </b></a>
                                           </button>
                                         </h5>
                                       </div>
@@ -53,7 +53,7 @@
                                       <div class="card-header" id="heading{{ loop.index+4 }}">
                                         <h5 class="mb-0">
                                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{loop.index+4}}" aria-expanded="true" aria-controls="collapse{{loop.index+4}}">
-                                            <a id = "target{{loop.index+4}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
+                                            <a id = "{{loop.index+4}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
                                           </button>
                                         </h5>
                                       </div>
@@ -78,7 +78,7 @@
                                       <div class="card-header" id="heading{{ loop.index+8 }}">
                                         <h5 class="mb-0">
                                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{loop.index+8}}" aria-expanded="true" aria-controls="collapse{{loop.index+8}}">
-                                            <a id = "target{{loop.index+8}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
+                                            <a id = "{{loop.index+8}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
                                           </button>
                                         </h5>
                                       </div>
@@ -103,7 +103,7 @@
                                       <div class="card-header" id="heading{{ loop.index+12 }}">
                                         <h5 class="mb-0">
                                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{loop.index+12}}" aria-expanded="true" aria-controls="collapse{{loop.index+12}}">
-                                            <a id = "target{{loop.index+12}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
+                                            <a id = "{{loop.index+12}}"><b>{{section['sectionSubTitle']|safe}}</b></a>
                                           </button>
                                         </h5>
                                       </div>
@@ -128,7 +128,7 @@
                                       <div class="card-header" id="heading{{ loop.index+16 }}">
                                         <h5 class="mb-0">
                                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{loop.index+16}}" aria-expanded="true" aria-controls="collapse{{loop.index+16}}">
-                                            <a id = "target{{loop.index16}}"></a><b>{{section['sectionSubTitle']|safe}}</b></a>
+                                            <a id = "{{loop.index16}}"></a><b>{{section['sectionSubTitle']|safe}}</b></a>
                                           </button>
                                         </h5>
                                       </div>
