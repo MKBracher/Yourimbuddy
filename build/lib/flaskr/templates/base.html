@@ -1,0 +1,68 @@
+<!doctype html>
+<title>{% block title %}{% endblock %}-Yourimbuddy </title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-light fixed-top">
+          <div class="container">
+            <img src="../static/images/DemoLogo2.png" alt="Yourimbuddy"
+            style = "width: 215px; height: 50px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{url_for('index')}}">Home</a>
+                <a class="nav-item nav-link" href="{{url_for('general.campusServices')}}">Campus Services</a>
+                <a class="nav-item nav-link" href="{{url_for('general.studyEssentials')}}">Study Essentials</a>
+                <a class="nav-item nav-link" href="{{url_for('general.FAQ')}}">FAQ</a>
+              </div>
+              <!-- Navbar Right Side -->
+              
+               
+            
+              <div class="navbar-nav">
+                {% if g.member %}
+                  <!-- <a class="nav-item nav-link" href="{{url_for('blog.questions')}}">Ask a Question</a> -->
+                  <!-- <a class="nav-item nav-link" href="{{url_for('general.account')}}">Account</a> -->
+                  <a class="nav-item nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                {% else %}
+                  <a class="nav-item nav-link" href="{{url_for('auth.login')}}">Login</a>
+                  <a class="nav-item nav-link" href="{{url_for('auth.register')}}">Register</a>
+                {% endif %}
+              </div>
+
+              <!-- <form class="form-inline" method="GET, POST" action="SEARCH">
+                <div class="form-group">
+                  <label for="query"></label>
+                  <input type="text" class="form-control" name="query" id="query">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </form> -->
+            </div>
+          </div>
+        </nav>
+        <script>(function(w, d) { w.CollectId = "5f90e3a4abcdbf780bf5c471"; var h = d.head || d.getElementsByTagName("head")[0]; 
+        var s = d.createElement("script"); s.setAttribute("type", "text/javascript"); s.async=true; s.setAttribute("src", "https://collectcdn.com/launcher.js"); 
+        h.appendChild(s); })(window, document);</script>
+    </header>
+ 
+    <section class="content">
+        <header>
+            {% block header %} {% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
